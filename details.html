@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Specimen Details | StoneLog</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="top-nav">
+        <span class="logo">STONELOG / DETAILS</span>
+        <div class="nav-links">
+            <a href="index.html">Back to Vault</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="product-view" id="detailsView">
+            </div>
+    </main>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const fossilId = urlParams.get('id');
+        let fossils = JSON.parse(localStorage.getItem('stoneLogData')) || [];
+        
+        function renderDetails() {
+            const f = fossils.find(item => item.id == fossilId);
+            if (!f) return;
+
+            const mainImg = (f.images && f.images.length > 0) ? f.images[0] : '';
+            
+            // Generate thumbnails
+            let thumbnailHtml = '';
+            if (f.images && f.images.length > 1) {
+                thumbnailHtml = `<div class="thumbnail-grid">` + 
+                    f.images.map((img, i) => `
+                        <div class="thumb-wrapper ${i === 0 ? 'active' : ''}" onclick="updateMainImage('${img}', this)">
+                            <img src="${img}" onerror="this.src='https://placehold.co/100?text=Error'">
+                        </div>
+                    `).join('') + `</div>`;
+            }
+
+            document.getElementById('detailsView').innerHTML = `
+                <div class="details-layout">
+                    <div class="gallery-container">
+                        <div class="main-stage">
+                            <img src="${mainImg}" id="mainStageImage" class="featured-img-dynamic">
+                        </div>
+                        ${thumbnailHtml}
+                    </div>
+                    <div class="details-info">
+                        <p class="detail-subtitle">Specimen No. ${f.id}</p>
+                        <h1 class="detail-title">${f.name}</h1>
+                        <p class="latin-name">${f.latin || ''}</p>
+                        
+                        <div class="technical-specs">
+                            <div class="spec-row"><span class="spec-label">Location</span><span class="spec-value">${f.loc}</span></div>
+                            <div class="spec-row"><span class="spec-label">Period</span><span class="spec-value">${f.era}</span></div>
+                            <div class="spec-row"><span class="spec-label">Date Added</span><span class="spec-value">${f.date}</span></div>
+                        </div>
+
+                        <div class="detail-description">
+                            <h2 class="section-label">Description</h2>
+                            <div id="noteArea" contenteditable="true" onblur="updateNotes(${f.id}, this.innerText)" class="editable-notes">${f.notes || 'No notes...'}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateMainImage(src, thumb) {
+            const main = document.getElementById('mainStageImage');
+            main.style.opacity = 0; // Quick fade effect
+            setTimeout(() => {
+                main.src = src;
+                main.style.opacity = 1;
+            }, 150);
+            
+            document.querySelectorAll('.thumb-wrapper').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+        }
+
+        function updateNotes(id, value) {
+            const idx = fossils.findIndex(item => item.id == id);
+            if (idx !== -1) {
+                fossils[idx].notes = value;
+                localStorage.setItem('stoneLogData', JSON.stringify(fossils));
+            }
+        }
+
+        renderDetails();
+    </script>
+</body>
+</html>

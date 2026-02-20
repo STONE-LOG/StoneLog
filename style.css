@@ -1,0 +1,524 @@
+:root {
+    --bg-deep: #0a0a0a;
+    --bg-card: #141414;
+    --gold: #b5935a;
+    --gold-hover: #d4ae6d;
+    --text-pure: #ffffff;
+    --text-dim: #888888;
+    --border: #222222;
+    --danger: #ff4444;
+}
+
+body {
+    background-color: var(--bg-deep);
+    color: var(--text-pure);
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* --- Navigation --- */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--border);
+    background-color: var(--bg-deep);
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: white;
+    letter-spacing: 5px;
+}
+
+.nav-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--text-pure);
+    border-bottom: 1px solid var(--gold);
+}
+
+/* --- Layout --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 40px;
+}
+
+.section-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 25px;
+}
+
+/* --- Curator Panel (Form) --- */
+.curator-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 40px;
+    margin-bottom: 80px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    align-items: end;
+}
+
+.field label {
+    display: block;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+input[type="text"], 
+input[type="file"] {
+    width: 100%;
+    box-sizing: border-box;
+    background: #000;
+    border: 1px solid var(--border);
+    color: #fff;
+    padding: 12px;
+    font-family: inherit;
+    outline: none;
+    transition: border 0.3s;
+}
+
+input:focus {
+    border-color: var(--gold);
+}
+
+.btn-primary {
+    background: var(--gold);
+    color: #000;
+    border: none;
+    padding: 15px 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.btn-primary:hover {
+    background: var(--gold-hover);
+    transform: translateY(-2px);
+}
+
+.secondary-link {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    text-decoration: underline;
+    font-size: 0.7rem;
+    cursor: pointer;
+    margin-top: 15px;
+    display: inline-block;
+}
+
+/* --- Gallery Grid --- */
+.catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.fossil-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    transition: border-color 0.4s, transform 0.3s;
+}
+
+.fossil-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-5px);
+}
+
+.card-img {
+    height: 220px;
+    background-size: cover;
+    background-position: center;
+    background-color: #000;
+    filter: grayscale(0.3);
+    transition: filter 0.4s;
+    position: relative;
+    overflow: hidden;
+}
+
+.fossil-card:hover .card-img {
+    filter: grayscale(0);
+}
+
+.card-body {
+    padding: 25px;
+}
+
+.card-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    margin: 0 0 15px 0;
+    color: var(--text-pure);
+}
+
+.meta-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 5px;
+}
+
+.meta-label {
+    color: var(--text-dim);
+    text-transform: uppercase;
+}
+
+/* --- Actions --- */
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.action-btn {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 5px 0;
+    transition: opacity 0.2s;
+}
+
+.action-btn:hover {
+    opacity: 0.7;
+}
+
+.restore-btn {
+    color: var(--gold);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.delete-btn {
+    color: var(--danger);
+    font-weight: 400;
+}
+
+.edit-btn {
+    color: var(--text-pure);
+    text-decoration: underline;
+}
+
+.details-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 40px;
+}
+
+.details-image-box {
+    background: #000;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.featured-img {
+    max-width: 100%;
+    max-height: 600px;
+    object-fit: contain;
+}
+
+.detail-subtitle {
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.detail-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.latin-name {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--text-dim);
+    margin-top: 10px;
+}
+
+.technical-specs {
+    margin: 40px 0;
+    border-top: 1px solid var(--border);
+}
+
+.spec-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.85rem;
+}
+
+.spec-label {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-dim);
+}
+
+.spec-value {
+    color: var(--text-pure);
+    font-weight: 600;
+}
+
+.detail-description {
+    margin-top: 40px;
+    line-height: 1.8;
+    color: var(--text-dim);
+}
+
+@media (max-width: 900px) {
+    .details-layout { grid-template-columns: 1fr; }
+}
+
+.editable-notes {
+    white-space: pre-wrap;
+    border: 1px solid transparent;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-pure);
+    min-height: 150px;
+    transition: all 0.3s ease;
+}
+
+.editable-notes:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--gold);
+}
+
+.editable-notes:focus {
+    background: #000;
+    border-color: var(--gold);
+    outline: none;
+}
+
+.edit-hint {
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.mini-preview {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid var(--border);
+    display: block;
+    background: #000;
+}
+
+.main-stage {
+    background: #000;
+    border: 1px solid var(--border);
+    width: 100%;
+    height: 500px; /* Fixed height for the gallery box */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.featured-img-dynamic {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* This prevents cropping and maintains aspect ratio */
+    transition: opacity 0.2s ease-in-out;
+}
+
+/* Thumbnail Gallery Styling */
+.thumbnail-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.thumb-wrapper {
+    width: 70px;
+    height: 70px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    background: #000;
+}
+
+.thumb-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Thumbnails stay square for neatness */
+    opacity: 0.5;
+    transition: 0.3s;
+}
+
+.thumb-wrapper.active {
+    border-color: var(--gold);
+}
+
+.thumb-wrapper.active img, .thumb-wrapper:hover img {
+    opacity: 1;
+}
+
+@media (max-width: 900px) {
+    .main-stage { height: 350px; }
+}
+
+.preview-wrapper {
+    position: relative;
+    width: 100px;
+    background: #000;
+    border: 1px solid var(--border);
+    padding: 5px;
+    transition: transform 0.2s;
+}
+
+.reorder-btns {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.reorder-btn {
+    background: var(--border);
+    color: #fff;
+    border: none;
+    font-size: 10px;
+    padding: 3px 6px;
+    cursor: pointer;
+    flex: 1;
+    margin: 0 1px;
+}
+
+.reorder-btn:hover {
+    background: var(--gold);
+    color: #000;
+}
+
+.delete-photo-btn {
+    background: #441111;
+    color: #ff4444;
+}
+
+.delete-photo-btn:hover {
+    background: #ff4444;
+    color: #fff;
+}
+
+.category-hub {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.category-card {
+    position: relative;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.category-card:hover { transform: scale(1.02); }
+
+.category-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    transition: background 0.3s;
+}
+
+.category-card:hover::before { background: rgba(0, 0, 0, 0.3); }
+
+.category-title {
+    position: relative;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    z-index: 1;
+}
+
+input[type="text"], select {
+    width: 100%; 
+    box-sizing: border-box; 
+    background: #000; 
+    border: 1px solid var(--border);
+    color: var(--text-dim); 
+    padding: 12px; 
+    font-family: inherit; 
+    outline: none;
+}
+
+.pip {
+    color: var(--gold);
+    font-size: 0.8rem;
+    transition: 0.3s;
+}
+
+/* Position the pips in the top left */
+.rarity-pips {
+    position: absolute;
+    top: 10px;    /* Distance from the top */
+    left: 10px;   /* Distance from the left */
+    margin: 0;    /* Reset margins to ensure precision */
+    z-index: 10;  /* Ensures stars sit on top of the image */
+    
+    /* Optional: Add a subtle dark background to make them pop on light images */
+    background: rgba(0, 0, 0, 0.4);
+    padding: 4px 8px;
+    border-radius: 4px;
+    backdrop-filter: blur(2px); /* Blur effect for a premium vault feel */
+}
+
+/* Keep your existing pip colors */
+.pip.filled { color: var(--gold); }
+.pip.empty { color: rgba(255, 255, 255, 0.2); }

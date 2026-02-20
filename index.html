@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StoneLog | Private Vault</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="top-nav">
+        <span class="logo">STONELOG</span>
+        <div class="nav-links">
+            <a href="index.html" class="active">Vault</a>
+            <a href="trash.html">Deleted</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="curator-panel">
+            <h2 class="section-label" id="formTitle">Log New Specimen</h2>
+            <div class="form-grid">
+                <input type="hidden" id="editId">
+                <div class="field">
+                    <label>Common Name</label>
+                    <input type="text" id="fossilName" placeholder="e.g. Calcite Ammonite">
+                </div>
+                <div class="field">
+                    <label>Species (Latin)</label>
+                    <input type="text" id="fossilLatin" placeholder="e.g. Asteroceras Obtusum">
+                </div>
+                <div class="field">
+                    <label>Location</label>
+                    <select id="fossilLoc">
+                        <option value="Lyme Regis">Lyme Regis</option>
+                        <option value="Charmouth">Charmouth</option>
+                        <option value="Folkestone">Folkestone</option>
+                        <option value="Abbey Wood">Abbey Wood</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Geological Era</label>
+                    <input type="text" id="fossilEra" placeholder="e.g. Lower Lias, Jurrasic">
+                </div>
+                <div class="field">
+                    <label>Rarity</label>
+                    <select id="fossilRarity">
+                        <option value="1">Common (1)</option>
+                        <option value="2">Uncommon (2)</option>
+                        <option value="3">Rare (3)</option>
+                        <option value="4">Very Rare (4)</option>
+                        <option value="5">Exotic (5)</option>
+                    </select>
+                </div>
+                    
+                <div class="field">
+                    <label>Category</label>
+                    <select id="fossilCategory">
+                        <option value="Ammonites">Ammonites</option>
+                        <option value="Pyrite Ammonites">Pyrite Ammonites</option>
+                        <option value="Belemnites">Belemnites</option>
+                        <option value="Bone">Bone</option>
+                        <option value="Crinoids">Crinoids</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="field full-width">
+                    <label>Image Path (e.g., images/specimen1.jpg)</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="fossilPathInput" placeholder="images/your-file.jpg">
+                        <button type="button" onclick="addPathToList()" class="btn-primary" style="padding: 10px;">Add</button>
+                    </div>
+                    <div id="uploadPreview" class="upload-preview-container"></div>
+                    <p class="edit-hint">* Type the path, click Add, then reorder. First image is the cover.</p>
+                </div>
+                <div class="form-actions">
+                    <button id="saveBtn" class="btn-primary">Archivise</button>
+                    <button id="cancelEdit" style="display:none;" class="secondary-link" onclick="resetForm()">Cancel Edition</button>
+                </div>
+            </div>
+        </section>
+
+        <div id="categoryMenu" class="category-hub"></div>
+
+        <div id="categoryHeader" style="display:none; margin-bottom: 40px;">
+            <button onclick="showCategories()" class="secondary-link">← Back to Collections</button>
+            <h2 id="activeCategoryTitle" class="detail-title" style="margin-top:20px;"></h2>
+        </div>
+        <div class="catalog-grid" id="catalogGrid"></div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

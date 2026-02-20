@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StoneLog | Deleted</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="top-nav">
+        <span class="logo">STONELOG / DELETED</span>
+        <div class="nav-links">
+            <a href="index.html">Vault</a>
+            <a href="trash.html" class="active">Deleted</a>
+        </div>
+    </nav>
+    <main class="container">
+        <h2 class="section-label">Deleted Specimens</h2>
+        <div class="catalog-grid" id="trashGrid"></div>
+    </main>
+    <script>
+        const trashGrid = document.getElementById('trashGrid');
+        let trash = JSON.parse(localStorage.getItem('stoneLogTrash')) || [];
+        let fossils = JSON.parse(localStorage.getItem('stoneLogData')) || [];
+
+        function renderTrash() {
+            trashGrid.innerHTML = trash.length === 0 ? '<p style="color:#444;">No items in trash.</p>' : '';
+            trash.forEach((f, idx) => {
+                const cover = (f.images && f.images.length > 0) ? f.images[0] : '';
+                const card = document.createElement('div');
+                card.className = 'fossil-card';
+                card.innerHTML = `
+                    <div class="card-img" style="background-image: url('${cover}')"></div>
+                    <div class="card-body">
+                        <p class="detail-subtitle">${f.category} #${f.id}</p>
+                        <h3>${f.name}</h3>
+                        <div class="card-actions">
+                            <button class="action-btn restore-btn" onclick="restore(${idx})">Restore</button>
+                            <button class="action-btn delete-btn" onclick="permanentDelete(${idx})">Delete Forever</button>
+                        </div>
+                    </div>`;
+                trashGrid.appendChild(card);
+            });
+        }
+
+        function restore(idx) {
+            fossils.push(trash.splice(idx, 1)[0]);
+            save();
+        }
+        function permanentDelete(idx) {
+            if (confirm("Erase forever?")) { trash.splice(idx, 1); save(); }
+        }
+        function save() {
+            localStorage.setItem('stoneLogTrash', JSON.stringify(trash));
+            localStorage.setItem('stoneLogData', JSON.stringify(fossils));
+            renderTrash();
+        }
+        renderTrash();
+    </script>
+</body>
+</html>
